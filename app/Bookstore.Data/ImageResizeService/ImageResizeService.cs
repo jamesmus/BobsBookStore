@@ -7,6 +7,8 @@ namespace Bookstore.Data.ImageResizeService
 {
     public class ImageResizeService : IImageResizeService
     {
+        public ImageResizeService() { }
+
         private const int BookCoverImageWidth = 400;
         private const int BookCoverImageHeight = 600;
 

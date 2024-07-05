@@ -4,6 +4,9 @@ using Bookstore.Web.Helpers;
 using Bookstore.Domain.Offers;
 using Bookstore.Domain.ReferenceData;
 using System.Web.Mvc;
+using Bookstore.Data.Offers;
+using Bookstore.Data.ReferenceData;
+using Bookstore.Data;
 
 namespace Bookstore.Web.Controllers
 {
@@ -12,10 +15,10 @@ namespace Bookstore.Web.Controllers
         private readonly IReferenceDataService referenceDataService;
         private readonly IOfferService offerService;
 
-        public ResaleController(IReferenceDataService referenceDataService, IOfferService offerService)
+        public ResaleController()
         {
-            this.referenceDataService = referenceDataService;
-            this.offerService = offerService;
+            this.referenceDataService = InstanceCreator.GetReferenceDataService();
+            this.offerService = InstanceCreator.GetOfferService();
         }
 
         public async Task<ActionResult> Index()

@@ -14,9 +14,9 @@ namespace Bookstore.Data.Repositories
     {
         private readonly ApplicationDbContext dbContext;
 
-        public OfferRepository()
+        public OfferRepository(ApplicationDbContext dbContext)
         {
-            this.dbContext = ApplicationDbContext.GetDbContext();
+            this.dbContext = dbContext;
         }
 
         public async Task<OfferStatistics> GetStatisticsAsync()

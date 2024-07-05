@@ -3,6 +3,8 @@ using Bookstore.Web.Helpers;
 using Bookstore.Domain.Orders;
 using Bookstore.Web.ViewModel.Orders;
 using System.Web.Mvc;
+using Bookstore.Data.Orders;
+using Bookstore.Data;
 
 namespace Bookstore.Web.Controllers
 {
@@ -10,9 +12,9 @@ namespace Bookstore.Web.Controllers
     {
         private readonly IOrderService orderService;
 
-        public OrdersController(IOrderService orderService)
+        public OrdersController()
         {
-            this.orderService = orderService;
+            this.orderService = InstanceCreator.GetOrderService();
         }
 
         public async Task<ActionResult> Index()

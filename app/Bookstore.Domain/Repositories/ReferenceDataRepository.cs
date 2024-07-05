@@ -12,9 +12,9 @@ namespace Bookstore.Data.Repositories
     {
         private readonly ApplicationDbContext dbContext;
 
-        public ReferenceDataRepository()
+        public ReferenceDataRepository(ApplicationDbContext dbContext)
         {
-            this.dbContext = ApplicationDbContext.GetDbContext();
+            this.dbContext = dbContext;
         }
 
         async Task IReferenceDataRepository.AddAsync(ReferenceDataItem item)

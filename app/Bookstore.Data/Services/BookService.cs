@@ -1,10 +1,12 @@
-﻿using Bookstore.Domain.Orders;
+﻿using Bookstore.Domain;
+using Bookstore.Domain.Books;
+using Bookstore.Domain.Orders;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 
-namespace Bookstore.Domain.Books
+namespace Bookstore.Data.Books
 {
     public interface IBookService
     {
@@ -31,6 +33,15 @@ namespace Bookstore.Domain.Books
         private readonly IFileService fileService;
         private readonly IBookRepository bookRepository;
         private readonly IOrderRepository orderRepository;
+
+        public BookService()
+        {
+            this.imageResizeService = InstanceCreator.GetImageResizeService();
+            this.imageValidationService = InstanceCreator.GetLocalImageValidationService();
+            this.fileService = InstanceCreator.GetLocalFileService();
+            this.bookRepository = InstanceCreator.GetBookRepository();
+            this.orderRepository = InstanceCreator.GetOrderRepository();
+        }
 
         public BookService(IImageResizeService imageResizeService, IImageValidationService imageValidationService, IFileService fileService, IBookRepository bookRepository, IOrderRepository orderRepository)
         {

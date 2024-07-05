@@ -1,7 +1,8 @@
-﻿using System;
+﻿using Bookstore.Domain.Customers;
+using System;
 using System.Threading.Tasks;
 
-namespace Bookstore.Domain.Customers
+namespace Bookstore.Data.Customers
 {
     public interface ICustomerService
     {
@@ -16,9 +17,9 @@ namespace Bookstore.Domain.Customers
     {
         private readonly ICustomerRepository customerRepository;
 
-        public CustomerService(ICustomerRepository customerRepository)
+        public CustomerService()
         {
-            this.customerRepository = customerRepository;
+            this.customerRepository = InstanceCreator.GetCustomerRepository();
         }
 
         public async Task<Customer> GetAsync(int id)

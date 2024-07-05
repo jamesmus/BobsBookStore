@@ -1,4 +1,5 @@
 ﻿using Bookstore.Domain;
+using System.Configuration;
 using System.IO;
 using System.Threading.Tasks;
 
@@ -8,9 +9,9 @@ namespace Bookstore.Data.FileServices
     {
         private readonly string webRootPath;
 
-        public LocalFileService(string webRootPath)
+        public LocalFileService()
         {
-            this.webRootPath = webRootPath;
+            this.webRootPath = ConfigurationManager.AppSettings["Services/FileService"];
         }
 
         // The interface defines an async operation, however System.IO.File

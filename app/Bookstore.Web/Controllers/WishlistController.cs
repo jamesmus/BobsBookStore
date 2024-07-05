@@ -4,6 +4,9 @@ using Bookstore.Domain.Customers;
 using Bookstore.Domain.Carts;
 using Bookstore.Web.ViewModel.Wishlist;
 using System.Web.Mvc;
+using Bookstore.Data.Customers;
+using Bookstore.Data.Carts;
+using Bookstore.Data;
 
 namespace Bookstore.Web.Controllers
 {
@@ -13,10 +16,10 @@ namespace Bookstore.Web.Controllers
         private readonly ICustomerService customerService;
         private readonly IShoppingCartService shoppingCartService;
 
-        public WishlistController(ICustomerService customerService, IShoppingCartService shoppingCartService)
+        public WishlistController()
         {
-            this.customerService = customerService;
-            this.shoppingCartService = shoppingCartService;
+            this.customerService = InstanceCreator.GetCustomerService();
+            this.shoppingCartService = InstanceCreator.GetShoppingCartService();
         }
 
         public async Task<ActionResult> Index()

@@ -5,6 +5,9 @@ using Bookstore.Web.Helpers;
 using Bookstore.Web.ViewModel.Checkout;
 using System.Web.Mvc;
 using System.Threading.Tasks;
+using Bookstore.Data.Carts;
+using Bookstore.Data.Orders;
+using Bookstore.Data;
 
 namespace Bookstore.Web.Controllers
 {
@@ -14,13 +17,11 @@ namespace Bookstore.Web.Controllers
         private readonly IShoppingCartService shoppingCartService;
         private readonly IOrderService orderService;
 
-        public CheckoutController(IShoppingCartService shoppingCartService,
-                                  IOrderService orderService,
-                                  IAddressService addressService)
+        public CheckoutController()
         {
-            this.shoppingCartService = shoppingCartService;
-            this.orderService = orderService;
-            this.addressService = addressService;
+            this.shoppingCartService = InstanceCreator.GetShoppingCartService();
+            this.orderService = InstanceCreator.GetOrderService();
+            this.addressService = InstanceCreator.GetAddressService();
         }
 
         public async Task<ActionResult> Index()

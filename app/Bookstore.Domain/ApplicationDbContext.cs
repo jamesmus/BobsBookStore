@@ -8,22 +8,11 @@ using Bookstore.Domain.Orders;
 using Bookstore.Domain.ReferenceData;
 using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
-using System.Configuration;
 
 namespace Bookstore.Data
 {
     public class ApplicationDbContext : DbContext
     {
-        private static ApplicationDbContext _instance;
-        public static ApplicationDbContext GetDbContext()
-        {
-            if (_instance == null)
-            {
-                var connectionString = ConfigurationManager.AppSettings["ConnectionStrings/BookstoreDatabaseConnection"];
-                _instance = new ApplicationDbContext(connectionString);
-            }
-            return _instance;
-        }
         public ApplicationDbContext(string connectionString) : base(connectionString) { }
 
         public DbSet<Address> Address { get; set; }

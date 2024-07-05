@@ -1,7 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using Bookstore.Domain;
+using Bookstore.Domain.ReferenceData;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Bookstore.Domain.ReferenceData
+namespace Bookstore.Data.ReferenceData
 {
     public interface IReferenceDataService
     {
@@ -20,9 +22,9 @@ namespace Bookstore.Domain.ReferenceData
     {
         private readonly IReferenceDataRepository referenceDataRepository;
 
-        public ReferenceDataService(IReferenceDataRepository referenceDataRepository)
+        public ReferenceDataService()
         {
-            this.referenceDataRepository = referenceDataRepository;
+            this.referenceDataRepository = InstanceCreator.GetReferenceDataRepository();
         }
 
         public async Task<IPaginatedList<ReferenceDataItem>> GetReferenceDataAsync(ReferenceDataFilters filters, int pageIndex, int pageSize)

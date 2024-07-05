@@ -44,24 +44,20 @@
   <ItemGroup>
     <Compile Include="Addresses\Address.cs" />
     <Compile Include="Addresses\AddressDtos.cs" />
-    <Compile Include="Addresses\AddressService.cs" />
     <Compile Include="Addresses\IAddressRepository.cs" />
     <Compile Include="AdminUser\DbSecrets.cs" />
     <Compile Include="Books\Book.cs" />
     <Compile Include="Books\BookDtos.cs" />
     <Compile Include="Books\BookFilters.cs" />
     <Compile Include="Books\BookResult.cs" />
-    <Compile Include="Books\BookService.cs" />
     <Compile Include="Books\BookStatistics.cs" />
     <Compile Include="Books\IBookRepository.cs" />
     <Compile Include="Carts\IShoppingCartRepository.cs" />
     <Compile Include="Carts\ShoppingCart.cs" />
     <Compile Include="Carts\ShoppingCartDtos.cs" />
     <Compile Include="Carts\ShoppingCartItem.cs" />
-    <Compile Include="Carts\ShoppingCartService.cs" />
     <Compile Include="Customers\Customer.cs" />
     <Compile Include="Customers\CustomerDtos.cs" />
-    <Compile Include="Customers\CustomerService.cs" />
     <Compile Include="Customers\ICustomerRepository.cs" />
     <Compile Include="DateTimeExtensions.cs" />
     <Compile Include="Entity.cs" />
@@ -74,7 +70,6 @@
     <Compile Include="Offers\Offer.cs" />
     <Compile Include="Offers\OfferDtos.cs" />
     <Compile Include="Offers\OfferFilters.cs" />
-    <Compile Include="Offers\OfferService.cs" />
     <Compile Include="Offers\OfferStatistics.cs" />
     <Compile Include="Offers\OfferStatus.cs" />
     <Compile Include="Orders\IOrderRepository.cs" />
@@ -82,7 +77,6 @@
     <Compile Include="Orders\OrderDtos.cs" />
     <Compile Include="Orders\OrderFilters.cs" />
     <Compile Include="Orders\OrderItem.cs" />
-    <Compile Include="Orders\OrderService.cs" />
     <Compile Include="Orders\OrderStatistics.cs" />
     <Compile Include="Orders\OrderStatus.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -90,7 +84,6 @@
     <Compile Include="ReferenceData\ReferenceDataDtos.cs" />
     <Compile Include="ReferenceData\ReferenceDataFilters.cs" />
     <Compile Include="ReferenceData\ReferenceDataItem.cs" />
-    <Compile Include="ReferenceData\ReferenceDataService.cs" />
     <Compile Include="ReferenceData\ReferenceDataType.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -1,6 +1,5 @@
 ﻿using Bookstore.Domain.Addresses;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
@@ -13,7 +12,7 @@ namespace Bookstore.Data.Repositories
 
         public AddressRepository()
         {
-            this.dbContext = ApplicationDbContext.GetDbContext();
+            this.dbContext = ServiceProvider.GetApplicationDbContext();
         }
 
         async Task IAddressRepository.DeleteAsync(string sub, int id)

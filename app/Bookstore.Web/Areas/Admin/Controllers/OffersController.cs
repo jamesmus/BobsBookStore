@@ -1,5 +1,7 @@
 ﻿using System.Threading.Tasks;
 using System.Web.Mvc;
+using Bookstore.Data.Offers;
+using Bookstore.Data.ReferenceData;
 using Bookstore.Domain.Offers;
 using Bookstore.Domain.ReferenceData;
 using Bookstore.Web.Areas.Admin.Models.Offers;

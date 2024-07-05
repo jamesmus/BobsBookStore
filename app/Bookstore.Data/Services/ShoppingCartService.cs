@@ -1,6 +1,7 @@
-﻿using System.Threading.Tasks;
+﻿using Bookstore.Domain.Carts;
+using System.Threading.Tasks;
 
-namespace Bookstore.Domain.Carts
+namespace Bookstore.Data.Carts
 {
     public interface IShoppingCartService
     {
@@ -21,9 +22,9 @@ namespace Bookstore.Domain.Carts
     {
         private readonly IShoppingCartRepository shoppingCartRepository;
 
-        public ShoppingCartService(IShoppingCartRepository shoppingCartRepository)
+        public ShoppingCartService()
         {
-            this.shoppingCartRepository = shoppingCartRepository;
+            this.shoppingCartRepository = InstanceCreator.GetShoppingCartRepository();
         }
 
         public async Task<ShoppingCart> GetShoppingCartAsync(string shoppingCartCorrelationId)

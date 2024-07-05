@@ -1,5 +1,6 @@
-﻿using Bookstore.Domain.Addresses;
-using Bookstore.Domain.Customers;
+﻿using Bookstore.Data;
+using Bookstore.Data.Customers;
+using Bookstore.Domain.Addresses;
 using Bookstore.Web.Helpers;
 using Bookstore.Web.ViewModel.Address;
 using System.Threading.Tasks;
@@ -12,10 +13,10 @@ namespace Bookstore.Web.Controllers
         private readonly IAddressService addressService;
         private readonly ICustomerService customerService;
 
-        public AddressController(IAddressService addressService, ICustomerService customerService)
+        public AddressController()
         {
-            this.addressService = addressService;
-            this.customerService = customerService;
+            this.addressService = InstanceCreator.GetAddressService();
+            this.customerService = InstanceCreator.GetCustomerService();
         }
 
         public async Task<ActionResult> Index()

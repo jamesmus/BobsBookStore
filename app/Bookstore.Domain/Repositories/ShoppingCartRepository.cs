@@ -9,9 +9,9 @@ namespace Bookstore.Data.Repositories
     {
         private readonly ApplicationDbContext dbContext;
 
-        public ShoppingCartRepository()
+        public ShoppingCartRepository(ApplicationDbContext dbContext)
         {
-            this.dbContext = ApplicationDbContext.GetDbContext();
+            this.dbContext = dbContext;
         }
 
         async Task IShoppingCartRepository.AddAsync(ShoppingCart shoppingCart)

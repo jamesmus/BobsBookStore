@@ -1,10 +1,12 @@
-﻿using Bookstore.Domain.Customers;
+﻿using Bookstore.Domain;
+using Bookstore.Domain.Customers;
+using Bookstore.Domain.Offers;
 using Bookstore.Domain.Orders;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Bookstore.Domain.Offers
+namespace Bookstore.Data.Offers
 {
     public interface IOfferService
     {
@@ -26,10 +28,10 @@ namespace Bookstore.Domain.Offers
         private readonly IOfferRepository offerRepository;
         private readonly ICustomerRepository customerRepository;
 
-        public OfferService(IOfferRepository offerRepository, ICustomerRepository customerRepository)
+        public OfferService()
         {
-            this.offerRepository = offerRepository;
-            this.customerRepository = customerRepository;
+            this.offerRepository = InstanceCreator.GetOfferRepository();
+            this.customerRepository = InstanceCreator.GetCustomerRepository();
         }
 
         public async Task<IPaginatedList<Offer>> GetOffersAsync(OfferFilters filters, int pageIndex, int pageSize)

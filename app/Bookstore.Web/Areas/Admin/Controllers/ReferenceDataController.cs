@@ -1,4 +1,5 @@
-﻿using Bookstore.Domain.ReferenceData;
+﻿using Bookstore.Data.ReferenceData;
+using Bookstore.Domain.ReferenceData;
 using Bookstore.Web.Areas.Admin.Models.ReferenceData;
 using System.Threading.Tasks;
 using System.Web.Mvc;

@@ -1,11 +1,13 @@
-﻿using Bookstore.Domain.Carts;
+﻿using Bookstore.Domain;
+using Bookstore.Domain.Carts;
 using Bookstore.Domain.Customers;
+using Bookstore.Domain.Orders;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Bookstore.Domain.Orders
+namespace Bookstore.Data.Orders
 {
     public interface IOrderService
     {
@@ -31,13 +33,11 @@ namespace Bookstore.Domain.Orders
         private readonly IShoppingCartRepository shoppingCartRepository;
         private readonly ICustomerRepository customerRepository;
 
-        public OrderService(IOrderRepository orderRepository,
-            IShoppingCartRepository shoppingCartRepository,
-            ICustomerRepository customerRepository)
+        public OrderService()
         {
-            this.orderRepository = orderRepository;
-            this.shoppingCartRepository = shoppingCartRepository;
-            this.customerRepository = customerRepository;
+            this.orderRepository = InstanceCreator.GetOrderRepository();
+            this.shoppingCartRepository = InstanceCreator.GetShoppingCartRepository();
+            this.customerRepository = InstanceCreator.GetCustomerRepository();
         }
 
         public async Task<IPaginatedList<Order>> GetOrdersAsync(OrderFilters filters, int pageIndex = 1, int pageSize = 10)

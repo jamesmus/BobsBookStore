@@ -1,4 +1,7 @@
-﻿using Bookstore.Domain.Books;
+﻿using Bookstore.Data.Books;
+using Bookstore.Data.Offers;
+using Bookstore.Data.Orders;
+using Bookstore.Domain.Books;
 using Bookstore.Domain.Offers;
 using Bookstore.Domain.Orders;
 using Bookstore.Web.Areas.Admin.Models.Dashboard;

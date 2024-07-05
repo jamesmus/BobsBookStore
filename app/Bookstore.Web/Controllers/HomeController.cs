@@ -4,6 +4,8 @@ using Bookstore.Domain.Books;
 using System.Threading.Tasks;
 using Bookstore.Web.ViewModel.Home;
 using System.Web.Mvc;
+using Bookstore.Data;
+using Bookstore.Data.Books;
 
 namespace Bookstore.Web.Controllers
 {
@@ -12,9 +14,9 @@ namespace Bookstore.Web.Controllers
     {
         private readonly IBookService bookService;
 
-        public HomeController(IBookService bookService)
+        public HomeController()
         {
-            this.bookService = bookService;
+            this.bookService = InstanceCreator.GetBookService();
         }
 
         public async Task<ActionResult> Index()

@@ -4,6 +4,9 @@ using Bookstore.Domain.Books;
 using Bookstore.Domain.Carts;
 using Bookstore.Web.ViewModel.Search;
 using System.Web.Mvc;
+using Bookstore.Data.Books;
+using Bookstore.Data.Carts;
+using Bookstore.Data;
 
 namespace Bookstore.Web.Controllers
 {
@@ -13,10 +16,10 @@ namespace Bookstore.Web.Controllers
         private readonly IBookService inventoryService;
         private readonly IShoppingCartService shoppingCartService;
 
-        public SearchController(IBookService inventoryService, IShoppingCartService shoppingCartService)
+        public SearchController()
         {
-            this.inventoryService = inventoryService;
-            this.shoppingCartService = shoppingCartService;
+            this.inventoryService = InstanceCreator.GetBookService();
+            this.shoppingCartService = InstanceCreator.GetShoppingCartService();
         }
 
         public async Task<ActionResult> Index(string searchString, string sortBy = "Name", int pageIndex = 1, int pageSize = 10)

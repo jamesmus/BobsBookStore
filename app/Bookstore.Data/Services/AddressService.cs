@@ -1,4 +1,5 @@
-﻿using Bookstore.Domain.Customers;
+﻿using Bookstore.Data;
+using Bookstore.Domain.Customers;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -22,10 +23,10 @@ namespace Bookstore.Domain.Addresses
         private readonly IAddressRepository addressRepository;
         private readonly ICustomerRepository customerRepository;
 
-        public AddressService(IAddressRepository addressRepository, ICustomerRepository customerRepository)
+        public AddressService()
         {
-            this.addressRepository = addressRepository;
-            this.customerRepository = customerRepository;
+            this.addressRepository = InstanceCreator.GetAddressRepository();
+            this.customerRepository = InstanceCreator.GetCustomerRepository();
         }
 
         public async Task<Address> GetAddressAsync(string sub, int id)

@@ -69,14 +69,21 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationDbContext.cs" />
+    <Compile Include="Services\AddressService.cs" />
+    <Compile Include="Services\BookService.cs" />
     <Compile Include="BookstoreConfiguration.cs" />
+    <Compile Include="Services\CustomerService.cs" />
     <Compile Include="FileServices\LocalFileService.cs" />
     <Compile Include="FileServices\S3FileService.cs" />
     <Compile Include="ImageResizeService\ImageResizeService.cs" />
     <Compile Include="ImageValidationServices\LocalImageValidationService.cs" />
     <Compile Include="ImageValidationServices\RekognitionImageValidationService.cs" />
+    <Compile Include="InstanceCreator.cs" />
+    <Compile Include="Services\OfferService.cs" />
+    <Compile Include="Services\OrderService.cs" />
     <Compile Include="PaginatedList.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\ReferenceDataService.cs" />
     <Compile Include="Repositories\AddressRepository.cs" />
     <Compile Include="Repositories\BookRepository.cs" />
     <Compile Include="Repositories\CustomerRepository.cs" />
@@ -85,6 +92,7 @@
     <Compile Include="Repositories\ReferenceDataRepository.cs" />
     <Compile Include="Repositories\ShoppingCartRepository.cs" />
     <Compile Include="BookstoreDbInitializer.cs" />
+    <Compile Include="Services\ShoppingCartService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
