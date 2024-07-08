@@ -19,7 +19,7 @@ namespace Bookstore.Data
         {
             if (_instance == null)
             {
-                var connectionString = ConfigurationManager.AppSettings["ConnectionStrings/BookstoreDatabaseConnection"];
+                var connectionString = @"Server=(localdb)\MSSQLLocalDB;Initial Catalog=BookStoreClassic;MultipleActiveResultSets=true;Integrated Security=SSPI;"; ;
                 _instance = new ApplicationDbContext(connectionString);
             }
             return _instance;
