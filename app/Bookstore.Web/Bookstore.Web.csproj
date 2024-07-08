@@ -227,25 +227,6 @@
     <Compile Include="App_Start\ConfigurationSetup.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
-    <Compile Include="Areas\Admin\Controllers\AdminAreaControllerBase.cs" />
-    <Compile Include="Areas\Admin\Controllers\DashboardController.cs" />
-    <Compile Include="Areas\Admin\Controllers\ErrorController.cs" />
-    <Compile Include="Areas\Admin\Controllers\InventoryController.cs" />
-    <Compile Include="Areas\Admin\Controllers\OffersController.cs" />
-    <Compile Include="Areas\Admin\Controllers\OrdersController.cs" />
-    <Compile Include="Areas\Admin\Controllers\ReferenceDataController.cs" />
-    <Compile Include="Areas\Admin\Models\Dashboard\DashboardIndexViewModel.cs" />
-    <Compile Include="Areas\Admin\Models\ErrorViewModel.cs" />
-    <Compile Include="Areas\Admin\Models\Inventory\InventoryCreateUpdateViewModel.cs" />
-    <Compile Include="Areas\Admin\Models\Inventory\InventoryDetailsViewModel.cs" />
-    <Compile Include="Areas\Admin\Models\Inventory\InventoryIndexViewModel.cs" />
-    <Compile Include="Areas\Admin\Models\Offers\OfferIndexViewModel.cs" />
-    <Compile Include="Areas\Admin\Models\Orders\OrderDetailsViewModel.cs" />
-    <Compile Include="Areas\Admin\Models\Orders\OrderIndexViewModel.cs" />
-    <Compile Include="Areas\Admin\Models\PaginatedViewModel.cs" />
-    <Compile Include="Areas\Admin\Models\ReferenceData\ReferenceDataCreateViewModel.cs" />
-    <Compile Include="Areas\Admin\Models\ReferenceData\ReferenceDataIndexViewModel.cs" />
     <Compile Include="Controllers\AddressController.cs" />
     <Compile Include="Controllers\AuthenticationController.cs" />
     <Compile Include="Controllers\CheckoutController.cs" />
@@ -450,24 +431,6 @@
     <Content Include="Content\lib\jquery\jquery.slim.min.js" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
-    <Content Include="Areas\Admin\Views\Dashboard\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\Error\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\Inventory\CreateUpdate.cshtml" />
-    <Content Include="Areas\Admin\Views\Inventory\Details.cshtml" />
-    <Content Include="Areas\Admin\Views\Inventory\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\Offers\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\Orders\Details.cshtml" />
-    <Content Include="Areas\Admin\Views\Orders\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\ReferenceData\CreateUpdate.cshtml" />
-    <Content Include="Areas\Admin\Views\ReferenceData\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\Shared\Error.cshtml" />
-    <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
-    <Content Include="Areas\Admin\Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Areas\Admin\Views\Shared\_MessageBanner.cshtml" />
-    <Content Include="Areas\Admin\Views\Shared\_NavBarPartial.cshtml" />
-    <Content Include="Areas\Admin\Views\Shared\_Paginator.cshtml" />
-    <Content Include="Areas\Admin\Views\Shared\_ValidationScriptsPartial.cshtml" />
-    <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
     <Content Include="Scripts\jquery-validate\additional-methods.js" />
     <Content Include="Scripts\jquery-validate\additional-methods.min.js" />
     <Content Include="Scripts\jquery-validate\jquery.validate.js" />
@@ -638,12 +601,12 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\lib\jquery-validate\jquery-validation-sri.json" />
     <Content Include="Content\lib\jquery\jquery.min.map" />
     <Content Include="Content\lib\jquery\jquery.slim.min.map" />
-    <Content Include="Areas\Admin\Views\web.config" />
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-validate\jquery-validation-sri.json" />
     <Content Include="Scripts\jquery\jquery.min.map" />
@@ -698,10 +661,10 @@
     <Error Condition="!Exists('..\..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\EntityFramework.6.4.4\build\EntityFramework.props'))" />
     <Error Condition="!Exists('..\..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\EntityFramework.6.4.4\build\EntityFramework.targets'))" />
     <Error Condition="!Exists('..\..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.4.1.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.4.1.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets'))" />
-    </Target>
+  </Target>
   <Import Project="..\..\packages\EntityFramework.6.4.4\build\EntityFramework.targets" Condition="Exists('..\..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" />
   <Import Project="..\..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.4.1.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets" Condition="Exists('..\..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.4.1.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets')" />
-     <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
   </Target>
