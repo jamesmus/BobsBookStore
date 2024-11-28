@@ -1,4 +1,4 @@
-﻿using Bookstore.Domain.Addresses;
+using Bookstore.Domain.Addresses;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -10,9 +10,9 @@ namespace Bookstore.Data.Repositories
     {
         private readonly ApplicationDbContext dbContext;
 
-        public AddressRepository()
+        public AddressRepository(ApplicationDbContext context)
         {
-            this.dbContext = ServiceProvider.GetApplicationDbContext();
+            this.dbContext = context;
         }
 
         async Task IAddressRepository.DeleteAsync(string sub, int id)
