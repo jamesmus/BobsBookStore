@@ -1,4 +1,3 @@
-﻿using Amazon.Auth.AccessControlPolicy;
 using Bookstore.Domain;
 using Bookstore.Domain.Offers;
 using Bookstore.Domain.Orders;
@@ -78,9 +77,9 @@ namespace Bookstore.Data.Repositories
          
                 
 
-            var result = new PaginatedList<Offer>(query, pageIndex, pageSize);
-
-            await result.PopulateAsync();
+            var totalCount = await query.CountAsync();
+            var items = await query.Skip((pageIndex - 1) * pageSize).Take(pageSize).ToListAsync();
+            var result = new PaginatedList<Offer>(items, totalCount, pageIndex, pageSize);
 
             return result;
         }

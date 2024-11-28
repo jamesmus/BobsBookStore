@@ -1,4 +1,4 @@
-﻿using Bookstore.Domain;
+using Bookstore.Domain;
 using Bookstore.Domain.Books;
 using System;
 using System.Collections;
@@ -73,9 +73,9 @@ namespace Bookstore.Data.Repositories
                 .Include(x => x.BookType)
                 .Include(x => x.Condition);
 
-            var result = new PaginatedList<Book>(query, pageIndex, pageSize);
-
-            await result.PopulateAsync();
+            var totalCount = await query.CountAsync();
+            var items = await query.Skip((pageIndex - 1) * pageSize).Take(pageSize).ToListAsync();
+            var result = new PaginatedList<Book>(items, totalCount, pageIndex, pageSize);
 
             return result;
         }
@@ -108,13 +108,13 @@ namespace Bookstore.Data.Repositories
                     break;
 
                 default:
-                    query.OrderBy(x => x.Name);
+                    query = query.OrderBy(x => x.Name);
                     break;
             }
 
-            var result = new PaginatedList<Book>(query, pageIndex, pageSize);
-
-            await result.PopulateAsync();
+            var totalCount = await query.CountAsync();
+            var items = await query.Skip((pageIndex - 1) * pageSize).Take(pageSize).ToListAsync();
+            var result = new PaginatedList<Book>(items, totalCount, pageIndex, pageSize);
 
             return result;
         }

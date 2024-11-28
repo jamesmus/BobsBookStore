@@ -1,4 +1,4 @@
-﻿using Bookstore.Domain;
+using Bookstore.Domain;
 using Bookstore.Domain.Books;
 using System;
 using System.Collections;
@@ -9,6 +9,44 @@ using System.Threading.Tasks;
 
 namespace Bookstore.Data.Repositories
 {
+    public class PaginatedList<T> : List<T>, IPaginatedList<T>
+    {
+        public int PageIndex { get; private set; }
+        public int TotalPages { get; private set; }
+        public int TotalCount { get; private set; }
+
+        public PaginatedList(List<T> items, int count, int pageIndex, int pageSize)
+        {
+            PageIndex = pageIndex;
+            TotalPages = (int)Math.Ceiling(count / (double)pageSize);
+            TotalCount = count;
+
+            this.AddRange(items);
+        }
+
+        public bool HasPreviousPage => PageIndex > 1;
+        public bool HasNextPage => PageIndex < TotalPages;
+
+        public static async Task<PaginatedList<T>> CreateAsync(IQueryable<T> source, int pageIndex, int pageSize)
+        {
+            var count = await source.CountAsync();
+            var items = await source.Skip((pageIndex - 1) * pageSize).Take(pageSize).ToListAsync();
+            return new PaginatedList<T>(items, count, pageIndex, pageSize);
+        }
+
+        public Task PopulateAsync()
+        {
+            // This method is already populated in the constructor, so we can just return a completed task
+            return Task.CompletedTask;
+        }
+
+        public IEnumerable<int> GetPageList(int pageSize)
+        {
+            var pageCount = (int)Math.Ceiling(TotalCount / (double)pageSize);
+            return Enumerable.Range(1, pageCount);
+        }
+    }
+
     public class BookRepository : IBookRepository
     {
         private readonly ApplicationDbContext dbContext;
@@ -73,11 +111,7 @@ namespace Bookstore.Data.Repositories
                 .Include(x => x.BookType)
                 .Include(x => x.Condition);
 
-            var result = new PaginatedList<Book>(query, pageIndex, pageSize);
-
-            await result.PopulateAsync();
-
-            return result;
+            return await PaginatedList<Book>.CreateAsync(query, pageIndex, pageSize);
         }
 
         async Task<IPaginatedList<Book>> IBookRepository.ListAsync(string searchString, string sortBy, int pageIndex, int pageSize)
@@ -108,15 +142,11 @@ namespace Bookstore.Data.Repositories
                     break;
 
                 default:
-                    query.OrderBy(x => x.Name);
+                    query = query.OrderBy(x => x.Name);
                     break;
             }
 
-            var result = new PaginatedList<Book>(query, pageIndex, pageSize);
-
-            await result.PopulateAsync();
-
-            return result;
+            return await PaginatedList<Book>.CreateAsync(query, pageIndex, pageSize);
         }
 
         async Task IBookRepository.AddAsync(Book book)
