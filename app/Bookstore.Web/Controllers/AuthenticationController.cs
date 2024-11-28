@@ -1,12 +1,20 @@
-﻿using System;
-using System.Web;
-using System.Web.Mvc;
-using BobsBookstoreClassic.Data;
+using System;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
+using Bookstore.Data;
+using Microsoft.Extensions.Configuration;
 
 namespace Bookstore.Web.Controllers
 {
     public class AuthenticationController : Controller
     {
+        private readonly IConfiguration _configuration;
+
+        public AuthenticationController(IConfiguration configuration)
+        {
+            _configuration = configuration;
+        }
+
         public ActionResult Login(string redirectUri = null)
         {
             if(string.IsNullOrWhiteSpace(redirectUri)) return RedirectToAction("Index", "Home");
@@ -16,14 +24,17 @@ namespace Bookstore.Web.Controllers
 
         public ActionResult LogOut()
         {
-            return BookstoreConfiguration.Get("Services/Authentication") == "aws" ? CognitoSignOut() : LocalSignOut();
+            return _configuration["Services:Authentication"] == "aws" ? CognitoSignOut() : LocalSignOut();
         }
 
         private ActionResult LocalSignOut()
         {
             if (HttpContext.Request.Cookies["LocalAuthentication"] != null)
             {
-                HttpContext.Response.Cookies.Add(new HttpCookie("LocalAuthentication") { Expires = DateTime.Now.AddDays(-1) });
+                HttpContext.Response.Cookies.Append("LocalAuthentication", "", new CookieOptions
+                {
+                    Expires = DateTime.Now.AddDays(-1)
+                });
             }
 
             return RedirectToAction("Index", "Home");
@@ -33,12 +44,15 @@ namespace Bookstore.Web.Controllers
         {
             if (Request.Cookies[".AspNet.Cookies"] != null)
             {
-                Response.Cookies.Add(new HttpCookie(".AspNet.Cookies") { Expires = DateTime.Now.AddDays(-1) });
+                Response.Cookies.Append(".AspNet.Cookies", "", new CookieOptions
+                {
+                    Expires = DateTime.Now.AddDays(-1)
+                });
             }
 
-            var domain = BookstoreConfiguration.Get("Authentication/Cognito/CognitoDomain");
-            var clientId = BookstoreConfiguration.Get("Authentication/Cognito/LocalClientId");
-            var logoutUri = $"{Request.Url.Scheme}://{Request.Url.Host}:{Request.Url.Port}/";
+            var domain = _configuration["Authentication:Cognito:CognitoDomain"];
+            var clientId = _configuration["Authentication:Cognito:LocalClientId"];
+            var logoutUri = $"{Request.Scheme}://{Request.Host}/";
 
             return Redirect($"{domain}/logout?client_id={clientId}&logout_uri={logoutUri}");
         }

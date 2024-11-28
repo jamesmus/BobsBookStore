@@ -1,4 +1,4 @@
-﻿using Bookstore.Domain;
+using Bookstore.Domain;
 using Bookstore.Domain.Books;
 using System;
 using System.Collections;
@@ -9,6 +9,43 @@ using System.Threading.Tasks;
 
 namespace Bookstore.Data.Repositories
 {
+    public class PaginatedList<T> : List<T>, IPaginatedList<T>
+    {
+        public int PageIndex { get; private set; }
+        public int TotalPages { get; private set; }
+        public int TotalCount { get; private set; }
+        private readonly IQueryable<T> _source;
+        private readonly int _pageSize;
+
+        public PaginatedList(IQueryable<T> source, int pageIndex, int pageSize)
+        {
+            _source = source;
+            _pageSize = pageSize;
+            TotalCount = source.Count();
+            TotalPages = (int)Math.Ceiling(TotalCount / (double)pageSize);
+            PageIndex = pageIndex;
+
+            this.AddRange(source.Skip((pageIndex - 1) * pageSize).Take(pageSize).ToList());
+        }
+
+        public bool HasPreviousPage => PageIndex > 1;
+        public bool HasNextPage => PageIndex < TotalPages;
+
+        public Task PopulateAsync()
+        {
+            // This method is now a no-op since we're populating in the constructor
+            return Task.CompletedTask;
+        }
+
+        public IEnumerable<int> GetPageList(int pageIndex)
+        {
+            int startPage = Math.Max(1, pageIndex - 5);
+            int endPage = Math.Min(TotalPages, pageIndex + 4);
+
+            return Enumerable.Range(startPage, endPage - startPage + 1);
+        }
+    }
+
     public class BookRepository : IBookRepository
     {
         private readonly ApplicationDbContext dbContext;
