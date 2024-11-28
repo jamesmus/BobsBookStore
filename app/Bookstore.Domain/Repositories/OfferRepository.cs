@@ -1,4 +1,3 @@
-﻿using Amazon.Auth.AccessControlPolicy;
 using Bookstore.Domain;
 using Bookstore.Domain.Offers;
 using Bookstore.Domain.Orders;
