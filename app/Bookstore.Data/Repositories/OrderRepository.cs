@@ -1,4 +1,4 @@
-﻿using Bookstore.Domain;
+using Bookstore.Domain;
 using Bookstore.Domain.Books;
 using Bookstore.Domain.Orders;
 using System;
@@ -92,7 +92,7 @@ namespace Bookstore.Data.Repositories
                 .Include(x => x.OrderItems)
                 .Include(x => x.OrderItems.Select(y => y.Book));
 
-            var result = new PaginatedList<Order>(query, pageIndex, pageSize);
+            var result = new PaginatedList<Order>(await query.ToListAsync(), pageIndex, pageSize, await query.CountAsync());
 
             await result.PopulateAsync();
 

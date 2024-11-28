@@ -1,4 +1,4 @@
-﻿using Bookstore.Domain;
+using Bookstore.Domain;
 using Bookstore.Domain.Books;
 using Bookstore.Domain.ReferenceData;
 using System.Collections.Generic;
@@ -41,9 +41,9 @@ namespace Bookstore.Data.Repositories
                 query = query.Where(x => x.DataType == filters.ReferenceDataType.Value);
             }
 
-            var result = new PaginatedList<ReferenceDataItem>(query, pageIndex, pageSize);
-
-            await result.PopulateAsync();
+            var items = await query.ToListAsync();
+            var totalCount = await query.CountAsync();
+            var result = new PaginatedList<ReferenceDataItem>(items, pageIndex, pageSize, totalCount);
 
             return result;
         }

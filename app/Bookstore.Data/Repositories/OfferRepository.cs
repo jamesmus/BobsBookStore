@@ -1,4 +1,4 @@
-﻿using Amazon.Auth.AccessControlPolicy;
+using Amazon.Auth.AccessControlPolicy;
 using Bookstore.Domain;
 using Bookstore.Domain.Offers;
 using Bookstore.Domain.Orders;
@@ -75,12 +75,11 @@ namespace Bookstore.Data.Repositories
             query = query.Include(x => x.Customer)
                 .Include(x => x.Condition)
                 .Include(x => x.Genre);
-         
-                
 
-            var result = new PaginatedList<Offer>(query, pageIndex, pageSize);
+            var totalCount = await query.CountAsync();
+            var items = await query.Skip((pageIndex - 1) * pageSize).Take(pageSize).ToListAsync();
 
-            await result.PopulateAsync();
+            var result = new PaginatedList<Offer>(items, pageIndex, pageSize, totalCount);
 
             return result;
         }

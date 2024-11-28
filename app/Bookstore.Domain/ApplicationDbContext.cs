@@ -1,4 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations.Schema;
 using Bookstore.Domain.Addresses;
 using Bookstore.Domain.Books;
 using Bookstore.Domain.Carts;
@@ -58,7 +58,9 @@ namespace Bookstore.Data
             modelBuilder.Entity<ShoppingCartItem>().HasKey(x => new { x.Id, x.ShoppingCartId });
             modelBuilder.Entity<ShoppingCartItem>().Property(x => x.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
 
-            Database.SetInitializer(new BookstoreDbInitializer());
+// Note: Database initialization in EF Core is typically handled using migrations or EnsureCreated
+            // For migrations: Use Add-Migration and Update-Database commands
+            // For EnsureCreated: Call context.Database.EnsureCreated() in your application startup
         }
     }
 }
